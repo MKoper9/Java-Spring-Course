@@ -1,16 +1,11 @@
 package com.example.todoapp.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@NoArgsConstructor
 @Table(name = "tasks")
-class Task {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +14,14 @@ class Task {
     private String description;
     private boolean done;
 
+    public Task() {
+    }
+
     public int getId() {
         return id;
     }
 
-    void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
