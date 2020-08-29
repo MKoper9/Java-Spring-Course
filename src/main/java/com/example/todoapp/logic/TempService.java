@@ -1,0 +1,22 @@
+package com.example.todoapp.logic;
+
+import com.example.todoapp.model.Project;
+import com.example.todoapp.model.Task;
+import com.example.todoapp.model.TaskGroupRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+class TempService {
+    @Autowired
+    List<String> temp(TaskGroupRepository repository){
+        // FIXME n+1 selectors
+        return repository.findAll().stream()
+                .flatMap(taskGroup -> taskGroup.getTasks().stream())
+                .map(Task::getDescription)
+                .collect(Collectors.toList());
+    }
+}
