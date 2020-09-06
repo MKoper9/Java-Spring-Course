@@ -1,10 +1,13 @@
 package com.example.todoapp.model;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Set;
 
+@NoArgsConstructor
 @Entity
 @Table(name = "projects")
 public class Project {
