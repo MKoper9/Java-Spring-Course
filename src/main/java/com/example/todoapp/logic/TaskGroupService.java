@@ -5,12 +5,11 @@ import com.example.todoapp.model.TaskGroupRepository;
 import com.example.todoapp.model.TaskRepository;
 import com.example.todoapp.model.projection.GroupReadModel;
 import com.example.todoapp.model.projection.GroupWriteModel;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+
 public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
@@ -31,7 +30,7 @@ public class TaskGroupService {
                 .collect(Collectors.toList());
     }
 
-    public void toggleGroup(int groupId){
+    public  void toggleGroup(int groupId){
         if(taskRepository.existByDoneIsFalseAndGroup_Id(groupId)){
             throw new IllegalStateException("Group has undone tasks. Dona all the tasks first");
         }
