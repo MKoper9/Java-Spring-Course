@@ -28,7 +28,7 @@ public class ProjectStep {
         return description;
     }
 
-    void setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
@@ -47,4 +47,5 @@ public class ProjectStep {
     void setProject(Project project) {
         this.project = project;
     }
+
 }

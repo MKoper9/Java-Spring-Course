@@ -27,12 +27,15 @@ public class Task extends Audit {
     private TaskGroup group;
 
 
-    public Task() {
+    public Task(String description, LocalDateTime now) {
     }
 
-    public Task(String description, LocalDateTime deadline) {
+    public Task(String description, LocalDateTime deadline, TaskGroup group) {
         this.description = description;
         this.deadline = deadline;
+        if(group!=null){
+            this.group=group;
+        }
     }
 
     public int getId() {
