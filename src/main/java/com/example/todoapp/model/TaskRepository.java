@@ -21,4 +21,6 @@ public interface TaskRepository {
     Task save(Task entity);
 
     List<Task>findByDone(@Param("state")boolean done);
+
+    List<Task>findAllByGroup_Id(Integer groupId);
 }

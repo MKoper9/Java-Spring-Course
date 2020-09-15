@@ -2,6 +2,8 @@ package com.example.todoapp.logic;
 
 import com.example.todoapp.model.Task;
 import com.example.todoapp.model.TaskRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import java.util.concurrent.CompletableFuture;
 
 @Service
 public class TaskService {
+    public static final Logger logger = LoggerFactory.getLogger(TaskService.class);
     public final TaskRepository repository;
 
     public TaskService(final TaskRepository repository) {
@@ -18,6 +21,7 @@ public class TaskService {
 
     @Async
     public CompletableFuture<List<Task>> findAllAsync(){
+        logger.info("Sypply async!");
         return CompletableFuture.supplyAsync(repository::findAll);
     }
 }
