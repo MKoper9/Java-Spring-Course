@@ -10,21 +10,31 @@ import java.util.stream.Collectors;
 
 public class GroupReadModel {
     private String description;
+    private int id;
     /**
      * Deadline form the latest task in group
-     * **/
+     **/
     private LocalDateTime deadline;
-    private Set<GroupTaskReadModel>tasks;
+    private Set<GroupTaskReadModel> tasks;
 
     public GroupReadModel(TaskGroup source) {
-        description=source.getDescription();
+        id = source.getId();
+        description = source.getDescription();
         source.getTasks().stream()
                 .map(Task::getDeadline)
                 .max(LocalDateTime::compareTo)
-                .ifPresent(date ->deadline = date);
-        tasks=source.getTasks().stream()
+                .ifPresent(date -> deadline = date);
+        tasks = source.getTasks().stream()
                 .map(GroupTaskReadModel::new)
                 .collect(Collectors.toSet());
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {

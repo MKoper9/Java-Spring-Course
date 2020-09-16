@@ -8,7 +8,6 @@ import com.example.todoapp.model.projection.GroupWriteModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +31,8 @@ public class TaskGroupController {
 
     @PostMapping
     ResponseEntity<GroupReadModel> createGroup(@RequestBody @Valid GroupWriteModel toCreate) {
-        return ResponseEntity.created(URI.create("/")).body(service.createGroup(toCreate));
+        GroupReadModel result = service.createGroup(toCreate);
+        return ResponseEntity.created(URI.create("/"+result.getId())).body(result);
     }
 
     @GetMapping
@@ -51,5 +51,15 @@ public class TaskGroupController {
     public ResponseEntity<?> toogleGroup(@PathVariable int id) {
         service.toggleGroup(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    ResponseEntity<String>handleIllegalArgument(IllegalArgumentException e){
+        return ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(IllegalStateException.class)
+    ResponseEntity<String> handleIllegalState(IllegalStateException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
