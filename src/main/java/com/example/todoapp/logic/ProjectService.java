@@ -30,7 +30,7 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    public Project saveProject(ProjectWriteModel toSave) {
+    public Project save(ProjectWriteModel toSave) {
         return projectRepository.save(toSave.toProject());
     }
 
